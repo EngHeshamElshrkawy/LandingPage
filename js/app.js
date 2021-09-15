@@ -39,6 +39,16 @@ function resetUl(){
     });
 }
 
+
+function sectionInViewport(section) {
+    const boundries = section.getBoundingClientRect();
+    return (
+        boundries.top <= (window.innerHeight /4 || document.documentElement.clientHeight/4) &&
+        boundries.bottom >= (window.innerHeight /4 || document.documentElement.clientHeight/4)
+    );
+}
+
+
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -49,17 +59,52 @@ function resetUl(){
 sectionsList.forEach(populateNavigationBar);
 
 // Add class 'active' to section when near top of viewport
+document.addEventListener('scroll', function (e) {
+    sectionsList.forEach(function(section){
+        if(sectionInViewport(section)){
+            if(!section.classList.contains("your-active-class")){
+                section.classList.remove("your-active-class");
+                sectionsList.forEach(function(element, index ,array){
+                    if(section === element){
+                        resetUl();
+                        ul[index].style.background = "rgb(136,203,171)";
+                    }
+                });
+                section.classList.add("your-active-class");
+            }
+        }else{
+            sectionsList.forEach(function(element, index ,array){
+                if(section === element){
+                    ul[index].style.background = "transparent";
+                }
+            });
+            if(section.classList.contains("your-active-class")){
+                section.classList.remove("your-active-class");
+
+            }
+        }
+    });
+});
+
+
+
+
+
+
+
 
 
 // Scroll to anchor ID using scrollTO event
 navigationList.addEventListener('click', function(e){
     if(e.target != navigationList){
         resetUl();
-        e.target.style.background = "rgba(136,203,171,0.5)";
+        e.target.style.background = "rgb(136,203,171)";
     }
     sectionsList[ul.indexOf(e.target)].scrollIntoView();
     
 });
+
+
 
 
 
@@ -74,4 +119,5 @@ navigationList.addEventListener('click', function(e){
 // Scroll to section on link click
 
 // Set sections as active
+
 
