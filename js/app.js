@@ -25,6 +25,8 @@ let navigationBar = document.getElementsByClassName("page__header")[0];
 let mainHero = document.getElementsByClassName("main__hero")[0];
 
 
+
+
 /**
  * End Global Variables
  * Start Helper Functions
@@ -114,13 +116,15 @@ navigationList.addEventListener('click', function(e){
     if(e.target != navigationList){
         resetUl();
         e.target.style.background = backgroundColor;
+        e.preventDefault();
         sectionsList[ul.indexOf(e.target)].scrollIntoView();
     }
     
 });
 
 //Changing the visibility of the scroll to top button based on whether the user scrolled down past the page's fold or not.
-document.addEventListener("scroll", function(){
+document.addEventListener("scroll", function(e){
+    e.preventDefault();
     const rect = mainHero.getBoundingClientRect();
     if(rect.top <= -413){
         topButton.style.visibility = "visible";
@@ -134,12 +138,14 @@ topButton.addEventListener('click', scrollToTop);
 
 
 //Hide navigation bar if the user didn't scroll for 3 seconds.
-hidingNavigationBar = setTimeout(function(){
+hidingNavigationBar = setTimeout(function(e){
+    e.preventDefault();
     navigationBar.style.visibility = "hidden";
 }, 3000);
 
 //If the user scrolls, the navigation bar is set to visible again and the timer resets.
-document.addEventListener("scroll", function(){
+document.addEventListener("scroll", function(e){
+    e.preventDefault();
     navigationBar.style.visibility = "visible";
     clearTimeout(hidingNavigationBar);
     hidingNavigationBar = setTimeout(function(){
@@ -149,6 +155,7 @@ document.addEventListener("scroll", function(){
 
 //If the user hovers over the navigation bar, it resets the timer for hiding the navigation bar and sets it to visible.
 document.addEventListener("mousemove", function(e){
+    e.preventDefault();
     if(e.clientX <= 755 && e.clientX >=0 && e.clientY >=0 && e.clientY <= 22){
         navigationBar.style.visibility = "visible";
         clearTimeout(hidingNavigationBar);
