@@ -2,9 +2,9 @@
 
 # Demo-Preview
 
-![Preview of the page](/sources/preview_1.png)
+![Preview of the page](/sources/preview_1.PNG)
 
-![Scrolling through the page](/sources/preview_2.png)
+![Scrolling through the page](/sources/preview_2.PNG)
 
 # Table of Contents
 
