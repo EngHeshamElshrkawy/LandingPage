@@ -64,9 +64,8 @@ function sectionInViewport(section) {
 
 //This function returns the view back to the top of the page.
 function scrollToTop(){
-    document.documentElement.scrollTop = 0;
+    window.scrollTo({top: 0, behavior: 'smooth'});
 }
-
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -117,7 +116,7 @@ navigationList.addEventListener('click', function(e){
         resetUl();
         e.target.style.background = backgroundColor;
         e.preventDefault();
-        sectionsList[ul.indexOf(e.target)].scrollIntoView();
+        sectionsList[ul.indexOf(e.target)].scrollIntoView({behavior: 'smooth'});
     }
     
 });
